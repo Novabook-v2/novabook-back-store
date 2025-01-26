@@ -5,6 +5,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: org.apache.commons.dbcp2.BasicDataSource  # 사용할 데이터 소스 타입 (DBCP2)
+    url: jdbc:mysql://localhost:3306/be6_supernova_dev
+    username : root
+    password : 9eexju!@12
 
     dbcp2:
       initial-size: 2  # 처음 풀(pool)에 할당할 커넥션 개수
@@ -29,44 +32,16 @@ spring:
   #절대 변경 금지
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
 
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
-
-  #로그 크러쉬 정보
-  logstash:
-    host: 133.186.241.167
-    platform: NovaBook-Store-Dev
-    url: https://api-logncrash.cloud.toast.com/v2/log
-    projectName: Xyx7DoyszcG66ULx
-    projectVersion: 1.0.0
-    logVersion: v2
-    logSource: http
-    logType: log
-    logLevel: INFO
-    secretKey: JsGDL5oTWPImKY8nag9igsUAdnUOvLMI
-
-
-
-
-nhn:
-  cloud:
-    #키 매니저
-    keyManager:
-      appkey: 2SxwmBzUfnqJaA2A
-      redisKey: 60427297022b4bdb9650789537e4b945
-      storeKey: e0a81fc89a1d4c5196df53d3fdab0f64
-      imageManagerKey: f1a359544d624274b58cac169b00d774
-      rabbitMQKey: 5070b197613e4db6a73e9db96c54789f
-      elasticSearchKey: 74649bffcfbb40a9bcae7204e6863d05
-      elasticSearchUser: dd75e1de58f24239b6d249cdc1faff0c
-      userAccessKey: J9VxQFQEsmerR1n7FeJ6
-      secretAccessKey: zZEVopUHt6dxgRMt
-
 
 #유레카 활성화
 eureka:

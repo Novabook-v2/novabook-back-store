@@ -14,7 +14,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import store.novabook.store.common.util.KeyManagerUtil;
 import store.novabook.store.common.util.dto.RedisConfigDto;
 
 @Configuration
@@ -27,15 +26,11 @@ public class RedisConfig {
 
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory() {
-		RestTemplate restTemplate = new RestTemplate();
-
-		RedisConfigDto redisConfig = KeyManagerUtil.getRedisConfig(environment, restTemplate);
-
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-		redisStandaloneConfiguration.setHostName(redisConfig.host());
-		redisStandaloneConfiguration.setPort(redisConfig.port());
-		redisStandaloneConfiguration.setPassword(redisConfig.password());
-		redisStandaloneConfiguration.setDatabase(redisConfig.database());
+		redisStandaloneConfiguration.setHostName("localhost");
+		redisStandaloneConfiguration.setPort(6379);
+		redisStandaloneConfiguration.setPassword("default");
+		// redisStandaloneConfiguration.setDatabase(redisConfig.database());
 		return new LettuceConnectionFactory(redisStandaloneConfiguration);
 	}
 

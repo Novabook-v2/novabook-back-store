@@ -2,6 +2,13 @@ spring:
   application:
     name: 'store'
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: org.apache.commons.dbcp2.BasicDataSource  # 사용할 데이터 소스 타입 (DBCP2)
+    url: jdbc:mysql://localhost:3306/be6_supernova_dev
+    username: root
+    password: 9eexju!@12
+
   #기본으로 실행할 프로필
   profiles:
     active: dev

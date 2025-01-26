@@ -37,7 +37,6 @@ import store.novabook.store.common.exception.InternalServerException;
 import store.novabook.store.common.image.NHNCloudClient;
 import store.novabook.store.common.image.NHNCloudMutilpartClient;
 import store.novabook.store.common.util.FileConverter;
-import store.novabook.store.common.util.KeyManagerUtil;
 import store.novabook.store.common.util.dto.ImageManagerDto;
 import store.novabook.store.image.entity.BookImage;
 import store.novabook.store.image.entity.Image;
@@ -64,13 +63,11 @@ public class ImageServiceImpl implements ImageService, InitializingBean {
 	@Override
 	public void afterPropertiesSet() {
 		RestTemplate restTemplate = new RestTemplate();
-		this.imageManagerDto = KeyManagerUtil.getImageManager(environment, restTemplate);
 	}
 
 	public void createBookImage(Book book, String requestImage) {
 		if (imageManagerDto == null) {
 			RestTemplate restTemplate = new RestTemplate();
-			this.imageManagerDto = KeyManagerUtil.getImageManager(environment, restTemplate);
 		}
 		String fileName = requestImage.substring(requestImage.lastIndexOf("/") + 1);
 		String outputFilePath = "/%s%s".formatted(imageManagerDto.localStorage(), fileName);

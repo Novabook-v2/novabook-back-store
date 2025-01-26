@@ -19,7 +19,7 @@ import store.novabook.store.book.dto.ReviewImageDto;
 import store.novabook.store.book.entity.Review;
 import store.novabook.store.book.repository.ReviewQueryRepository;
 
-@Repository
+// @Repository
 public class ReviewQueryRepositoryImpl extends QuerydslRepositorySupport implements ReviewQueryRepository {
 
 	public ReviewQueryRepositoryImpl() {
