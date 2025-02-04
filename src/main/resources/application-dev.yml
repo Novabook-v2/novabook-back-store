@@ -1,3 +1,19 @@
+DB_HOST: "localhost"
+DB_PORT: 3306
+DB_NAME: "be6_supernova_dev"
+DB_USERNAME: "root"
+DB_PASSWORD: "9eexju!@12"
+
+redis-host: "localhost"
+redis-port: 6379
+redis-password: "default"
+
+rabbitmq-host: "localhost"
+rabbitmq-username: "guest"
+rabbitmq-password: "guest"
+rabbitmq-port: 5672
+
+
 spring:
   application:
     name: 'store'
@@ -5,9 +21,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: org.apache.commons.dbcp2.BasicDataSource  # 사용할 데이터 소스 타입 (DBCP2)
-    url: jdbc:mysql://localhost:3306/be6_supernova_dev
-    username : root
-    password : 9eexju!@12
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
     dbcp2:
       initial-size: 2  # 처음 풀(pool)에 할당할 커넥션 개수
@@ -32,7 +48,7 @@ spring:
   #절대 변경 금지
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect

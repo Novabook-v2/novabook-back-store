@@ -36,6 +36,18 @@ import store.novabook.store.common.util.dto.RabbitMQConfigDto;
 @RequiredArgsConstructor
 public class RabbitMQConfig {
 
+	@Value("${rabbitmq-host}")
+	String rabbitmqHost;
+
+	@Value("${rabbitmq-username}")
+	String rabbitmqUserName;
+
+	@Value("${rabbitmq-password}")
+	String rabbitmqPassword;
+
+	@Value("${rabbitmq-port}")
+	Integer rabbitmqPort;
+
 	private final Environment environment;
 
 	@Value("${rabbitmq.queue.couponCreateNormal}")
@@ -73,10 +85,10 @@ public class RabbitMQConfig {
 
 	@Bean
 	public ConnectionFactory connectionFactory() {
-		CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
-		connectionFactory.setPort(5672);
-		connectionFactory.setUsername("guest");
-		connectionFactory.setPassword("guest");
+		CachingConnectionFactory connectionFactory = new CachingConnectionFactory(rabbitmqHost);
+		connectionFactory.setPort(rabbitmqPort);
+		connectionFactory.setUsername(rabbitmqUserName);
+		connectionFactory.setPassword(rabbitmqPassword);
 		return connectionFactory;
 	}
 
