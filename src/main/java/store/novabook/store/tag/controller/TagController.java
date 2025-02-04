@@ -45,13 +45,13 @@ public class TagController implements TagControllerDocs {
 		return ResponseEntity.ok().body(tagService.getTag(id));
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping
 	public ResponseEntity<CreateTagResponse> createTag(@RequestBody @Valid CreateTagRequest createTagRequest) {
 		return ResponseEntity.ok().body(tagService.createTag(createTagRequest));
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> updateTag(@Valid @RequestBody UpdateTagRequest updateTagRequest,
 		@PathVariable Long id) {
@@ -59,7 +59,7 @@ public class TagController implements TagControllerDocs {
 		return ResponseEntity.ok().build();
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteTag(@PathVariable Long id) {
 		tagService.deleteTag(id);

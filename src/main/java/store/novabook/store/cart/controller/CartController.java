@@ -32,7 +32,7 @@ public class CartController implements CartControllerDocs {
 
 	private final CartBookService cartBookService;
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/member")
 	public ResponseEntity<CartBookListDTO> getCartBookAllByMemberId(@CurrentMembers Long memberId) {
 		return ResponseEntity.ok().body(cartBookService.getCartBookAllByMemberId(memberId));

@@ -14,7 +14,7 @@ import store.novabook.store.common.security.aop.CheckRole;
 public class AdminController {
 
 	// 임시 비활성화(개발편의)
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@GetMapping()
 	public ResponseEntity<Void> admin() {
 		return ResponseEntity.ok().build();

@@ -26,7 +26,7 @@ import store.novabook.store.orders.service.WrappingPaperService;
 public class WrappingPaperController implements WrappingPaperControllerDocs {
 	private final WrappingPaperService wrappingPaperService;
 
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<CreateResponse> createWrappingPaper(@RequestBody CreateWrappingPaperRequest request) {
 		return ResponseEntity.ok(wrappingPaperService.createWrappingPaper(request));
@@ -40,14 +40,14 @@ public class WrappingPaperController implements WrappingPaperControllerDocs {
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@GetMapping("/{id}")
 	public ResponseEntity<GetWrappingPaperResponse> getWrappingPaper(@PathVariable Long id) {
 		GetWrappingPaperResponse response = wrappingPaperService.getWrappingPaperById(id);
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> updateWrappingPaper(@PathVariable Long id,
 		@Valid @RequestBody UpdateWrappingPaperRequest request) {

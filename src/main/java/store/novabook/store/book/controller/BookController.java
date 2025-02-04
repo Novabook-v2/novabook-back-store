@@ -41,7 +41,7 @@ public class BookController implements BookControllerDocs {
 		return ResponseEntity.ok().body(bookService.getBookToMainPage());
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@GetMapping
 	public ResponseEntity<Page<GetBookAllResponse>> getBookAll(Pageable pageable) {
 		return ResponseEntity.ok().body(bookService.getBookAll(pageable));

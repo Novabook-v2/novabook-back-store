@@ -26,7 +26,7 @@ public class PointPolicyController implements PointPolicyControllerDocs {
 
 	private final PointPolicyService pointPolicyService;
 
-	@CheckRole("ROLE_ADMIN")
+	// @CheckRole("ROLE_ADMIN")
 	@GetMapping
 	public ResponseEntity<Page<GetPointPolicyResponse>> getPoint(@CurrentMembers Long id, Pageable pageable) {
 		Page<GetPointPolicyResponse> pointPolicyResponseList = pointPolicyService.getPointPolicyList(pageable);

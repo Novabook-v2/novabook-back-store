@@ -35,7 +35,7 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 
 	private final MemberCouponService memberCouponService;
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping
 	public ResponseEntity<CreateMemberCouponResponse> createMemberCoupon(@CurrentMembers Long memberId,
 		@RequestBody CreateMemberCouponRequest request) {
@@ -43,7 +43,7 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping("/register")
 	public ResponseEntity<CreateMemberCouponResponse> registerMemberCoupon(@CurrentMembers Long memberId,
 		@RequestBody RegisterCouponRequest request) {
@@ -51,7 +51,7 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 		return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/history")
 	public ResponseEntity<Page<GetCouponHistoryResponse>> getMemberCouponHistoryByMemberId(
 		@CurrentMembers Long memberId,
@@ -60,7 +60,7 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/history/used")
 	public ResponseEntity<Page<GetUsedCouponHistoryResponse>> getMemberUsedCouponHistoryByMemberId(
 		@CurrentMembers Long memberId,
@@ -70,21 +70,21 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/is-valid")
 	public ResponseEntity<GetCouponAllResponse> getMemberCouponByMemberId(@CurrentMembers Long memberId) {
 		GetCouponAllResponse response = memberCouponService.getValidAllByMemberId(memberId);
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping
 	public ResponseEntity<GetCouponIdsResponse> getMemberCoupon(@CurrentMembers Long memberId) {
 		return ResponseEntity.ok().body(memberCouponService.getMemberCoupon(memberId));
 	}
 
 	// 쿠폰북 페이지 다운로드
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping("/download")
 	public ResponseEntity<CreateMemberCouponResponse> downloadCoupon(@CurrentMembers Long memberId,
 		@RequestBody DownloadCouponRequest request) {
@@ -93,7 +93,7 @@ public class MemberCouponController implements MemberCouponControllerDocs {
 	}
 
 	// 선착순 쿠폰
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping("/download/limited")
 	public ResponseEntity<Void> downloadLimitedCoupon(
 		@RequestHeader(value = "Authorization", required = false) String token,
