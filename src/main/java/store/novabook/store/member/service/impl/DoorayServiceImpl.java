@@ -24,7 +24,6 @@ public class DoorayServiceImpl implements DoorayService {
 
 	@Override
 	public void sendAuthCode(String uuid, String authCode) {
-
 		Map<String, Object> request = new HashMap<>();
 		request.put(BOT_NAME, NOVABOOK_BOT);
 		request.put("text", "휴면 계정 해지를 위한 인증코드: " + authCode);
@@ -37,7 +36,7 @@ public class DoorayServiceImpl implements DoorayService {
 		Map<String, Object> request = new HashMap<>();
 		request.put(BOT_NAME, NOVABOOK_BOT);
 		request.put("text", "주문 처리중 문제가 발생했습니다 \n상태:  " + orderSagaMessage.getStatus());
-		deadOrdersDoorayHookClient.sendMessage(request);
+		// deadOrdersDoorayHookClient.sendMessage(request);
 	}
 
 	@RabbitListener(queues = "nova.coupon.deadletter.queue")
@@ -45,6 +44,6 @@ public class DoorayServiceImpl implements DoorayService {
 		Map<String, Object> request = new HashMap<>();
 		request.put(BOT_NAME, NOVABOOK_BOT);
 		request.put("text", "쿠폰 처리중 문제가 발생했습니다");
-		deadOrdersDoorayHookClient.sendMessage(request);
+		// deadOrdersDoorayHookClient.sendMessage(request);
 	}
 }

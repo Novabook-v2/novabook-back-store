@@ -95,7 +95,7 @@ public class MemberController implements MemberControllerDocs {
 		return ResponseEntity.ok().body(memberService.matches(loginMemberRequest));
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/member/update")
 	public ResponseEntity<Void> updateMember(@CurrentMembers Long memberId,
 		@RequestBody UpdateMemberRequest updateMemberRequest) {
@@ -104,7 +104,7 @@ public class MemberController implements MemberControllerDocs {
 		return ResponseEntity.ok().build();
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/member/password")
 	public ResponseEntity<Void> updateMemberPassword(@CurrentMembers Long memberId,
 		@RequestBody @Valid UpdateMemberPasswordRequest updateMemberPasswordRequest) {
@@ -112,14 +112,14 @@ public class MemberController implements MemberControllerDocs {
 		return ResponseEntity.ok().build();
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/member/dormant")
 	public ResponseEntity<Void> updateMemberStatusToDormant(@CurrentMembers Long memberId) {
 		memberService.updateMemberStatusToDormant(memberId);
 		return ResponseEntity.ok().build();
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/member/withdraw")
 	public ResponseEntity<Void> updateMemberStatusToWithdraw(@CurrentMembers Long memberId,
 		@RequestBody DeleteMemberRequest deleteMemberRequest) {

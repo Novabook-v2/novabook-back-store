@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import store.novabook.store.search.controller.docs.BookSearchControllerDocs;
-import store.novabook.store.search.dto.GetBookSearchResponse;
+import store.novabook.store.search.dto.JpaGetBookSearchResponse;
 import store.novabook.store.search.service.impl.BookSearchServiceImpl;
 
 @RestController
@@ -20,23 +20,23 @@ public class BookSearchController implements BookSearchControllerDocs {
 	private final BookSearchServiceImpl bookSearchService;
 
 	@GetMapping("/keyword")
-	public Page<GetBookSearchResponse> searchByKeyword(@RequestParam String title, Pageable pageable) {
-		return bookSearchService.searchByKeywordContaining(title, pageable);
+	public Page<JpaGetBookSearchResponse> searchByKeyword(@RequestParam String title, Pageable pageable) {
+		return bookSearchService.searchByKeyword(title, pageable);
 	}
 
 	@GetMapping("/author")
-	public Page<GetBookSearchResponse> searchByAuthor(@RequestParam String author, Pageable pageable) {
-		return bookSearchService.searchByAuthorContaining(author, pageable);
+	public Page<JpaGetBookSearchResponse> searchByAuthor(@RequestParam String author, Pageable pageable) {
+		return bookSearchService.searchByAuthor(author, pageable);
 	}
 
 	@GetMapping("/publish")
-	public Page<GetBookSearchResponse> searchByPublish(@RequestParam String publish, Pageable pageable) {
-		return bookSearchService.searchByPublishContaining(publish, pageable);
+	public Page<JpaGetBookSearchResponse> searchByPublish(@RequestParam String publish, Pageable pageable) {
+		return bookSearchService.searchByPublisher(publish, pageable);
 	}
 
 	@GetMapping("/category")
-	public Page<GetBookSearchResponse> searchByCategory(@RequestParam String category, Pageable pageable) {
-		return bookSearchService.searchByCategoryListContaining(category, pageable);
+	public Page<JpaGetBookSearchResponse> searchByCategory(@RequestParam String category, Pageable pageable) {
+		return bookSearchService.searchByCategory(category, pageable);
 	}
 
 }

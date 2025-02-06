@@ -22,9 +22,13 @@ logging:
   level:
     org.springframework.amqp: DEBUG
 
+
+##엘라스틱 설정
 elasticsearch:
-  host: 125.6.36.57
+  enabled: false
+  host: "localhost"
   port: 9200
+
 
 #공통 설정 내용
 management:
@@ -70,24 +74,6 @@ spring:
     activate:
       on-profile: dev
 
----
-# h2
-spring:
-  config:
-    activate:
-      on-profile: local
-
-
----
-spring:
-  cloud:
-    openfeign:
-      client:
-        config:
-          doorayHookClient:
-            url: https://hook.dooray.com/services/3204376758577275363/3841573584705463142/XgrMG9YtRw65XfNFuTYFDg
-          deadOrdersQueueDoorayHookClient:
-            url: https://hook.dooray.com/services/3204376758577275363/3846032559099339784/uuota3uCT5mPjX2v1oG2JQ
 ---
 rabbitmq:
   queue:

@@ -1,74 +1,82 @@
 package store.novabook.store.search.service.impl;
 
-import org.springframework.data.domain.*;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.Criteria;
-import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
-import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import store.novabook.store.book.entity.Book;
 import store.novabook.store.common.exception.ErrorCode;
 import store.novabook.store.common.exception.InternalServerException;
-import store.novabook.store.search.document.BookDocument;
-import store.novabook.store.search.dto.GetBookSearchResponse;
+import store.novabook.store.image.entity.BookImage;
+import store.novabook.store.image.repository.BookImageRepository;
+import store.novabook.store.image.repository.ImageRepository;
+import store.novabook.store.search.dto.JpaGetBookSearchResponse;
+import store.novabook.store.search.repository.JpaBookSearchRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import java.util.Optional;
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookSearchServiceImpl {
-	// private final BookSearchRepository bookSearchRepository;
-	private final ElasticsearchOperations elasticsearchOperations;
+	private final JpaBookSearchRepository bookRepository;
+	private final BookImageRepository bookImageRepository;
+	private final ImageRepository imageRepository;
 
-	// 모든 단어 검색
-	public Page<GetBookSearchResponse> searchByKeywordContaining(String keyword, Pageable pageable) {
-		try{
-			// Page<BookDocument> bookDocuments = bookSearchRepository.findAll(keyword, pageable);
-			return Page.empty(pageable);
-			// return bookDocuments.map(GetBookSearchResponse::of);
-
-		} catch (Exception e){
+	// 키워드 검색 (제목, 설명, 상세 설명)
+	public Page<JpaGetBookSearchResponse> searchByKeyword(String keyword, Pageable pageable) {
+		try {
+			Page<Book> books = bookRepository.searchByKeyword(keyword, pageable);
+			return books.map(this::mapToResponse);
+		} catch (Exception e) {
 			throw new InternalServerException(ErrorCode.INVALID_REQUEST_ARGUMENT);
 		}
 	}
 
-	// 저자에 특정 단어가 포함된 문서 검색
-	public Page<GetBookSearchResponse> searchByAuthorContaining(String author, Pageable pageable) {
-		try{
-			// Page<BookDocument> bookDocuments = bookSearchRepository.findAllByAuthorIgnoreCase(author, pageable);
-			// return bookDocuments.map(GetBookSearchResponse::of);
-			return Page.empty(pageable);
-		} catch (Exception e){
+	// 저자 검색
+	public Page<JpaGetBookSearchResponse> searchByAuthor(String author, Pageable pageable) {
+		try {
+			Page<Book> books = bookRepository.searchByAuthor(author, pageable);
+			return books.map(this::mapToResponse);
+		} catch (Exception e) {
 			throw new InternalServerException(ErrorCode.INVALID_REQUEST_ARGUMENT);
 		}
 	}
 
-	// 출판사에 특정 단어가 포함된 문서 검색
-	public Page<GetBookSearchResponse> searchByPublishContaining(String author, Pageable pageable) {
-		try{
-			// Page<BookDocument> bookDocuments = bookSearchRepository.findAllByPublishIgnoreCase(author, pageable);
-			// return bookDocuments.map(GetBookSearchResponse::of);
-			return Page.empty(pageable);
-		} catch (Exception e){
+	// 출판사 검색
+	public Page<JpaGetBookSearchResponse> searchByPublisher(String publisher, Pageable pageable) {
+		try {
+			Page<Book> books = bookRepository.searchByPublisher(publisher, pageable);
+			return books.map(this::mapToResponse);
+		} catch (Exception e) {
 			throw new InternalServerException(ErrorCode.INVALID_REQUEST_ARGUMENT);
 		}
 	}
 
-	// 카테고리 특정 단어가 포함된 문서 검색
-	public Page<GetBookSearchResponse> searchByCategoryListContaining(String category, Pageable pageable) {
-		try{
-			// Page<BookDocument> bookDocuments = bookSearchRepository.findAllByCategoryListMatches(category, pageable);
-			// return bookDocuments.map(GetBookSearchResponse::of);
-			return Page.empty(pageable);
-		} catch (Exception e){
+	// 카테고리 검색
+	public Page<JpaGetBookSearchResponse> searchByCategory(String category, Pageable pageable) {
+		try {
+			Page<Book> books = bookRepository.searchByCategory(category, pageable);
+			return books.map(this::mapToResponse);
+		} catch (Exception e) {
 			throw new InternalServerException(ErrorCode.INVALID_REQUEST_ARGUMENT);
 		}
 	}
 
+	/**
+	 * Book 엔티티를 JpaGetBookSearchResponse로 변환하는 메서드
+	 * - 이미지 정보 조회 추가
+	 */
+	private JpaGetBookSearchResponse mapToResponse(Book book) {
 
+		// 1️⃣ Book ID로 Image ID 조회
+		Optional<Long> imageIdOpt = bookImageRepository.findImageIdByBookId(book.getId());
+
+		// 2️⃣ Image ID로 source 값 조회
+		String imageUrl = imageIdOpt.flatMap(imageRepository::findSourceById).orElse(null);
+
+		log.info("image Url = {}", imageUrl);
+		// 3️⃣ DTO 변환
+		return JpaGetBookSearchResponse.of(book, 0.0, 0, imageUrl);
+	}
 }

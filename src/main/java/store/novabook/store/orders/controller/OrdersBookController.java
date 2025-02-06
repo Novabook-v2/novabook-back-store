@@ -24,7 +24,7 @@ public class OrdersBookController implements OrdersBookControllerDocs {
 
 	private final OrdersBookService ordersBookService;
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/member/orders")
 	public ResponseEntity<Page<GetOrdersBookResponse>> getOrdersBookAll(@CurrentMembers Long memberId,
 		Pageable pageable) {
@@ -32,7 +32,7 @@ public class OrdersBookController implements OrdersBookControllerDocs {
 		return ResponseEntity.ok(responses);
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/detail/{ordersId}")
 	public ResponseEntity<GetOrderDetailResponse> getOrderDetails(@PathVariable Long ordersId) {
 		GetOrderDetailResponse response = ordersBookService.getOrderDetail(ordersId);
@@ -40,7 +40,7 @@ public class OrdersBookController implements OrdersBookControllerDocs {
 	}
 
 	//마이페이지에서 사용
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/members")
 	public ResponseEntity<Page<GetOrdersBookReviewIdResponse>> getOrdersBookReviewIdByMemberId(
 		@CurrentMembers Long memberId, Pageable pageable) {

@@ -32,7 +32,7 @@ public class CartController implements CartControllerDocs {
 
 	private final CartBookService cartBookService;
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/member")
 	public ResponseEntity<CartBookListDTO> getCartBookAllByMemberId(@CurrentMembers Long memberId) {
 		return ResponseEntity.ok().body(cartBookService.getCartBookAllByMemberId(memberId));
@@ -55,14 +55,14 @@ public class CartController implements CartControllerDocs {
 		return ResponseEntity.status(HttpStatus.OK).body(cartBookService.createCartBook(memberId, request));
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping("/adds")
 	public ResponseEntity<CreateCartBookListResponse> addCartBooks(@CurrentMembers Long memberId,
 		@Valid @RequestBody CartBookListDTO request) {
 		return ResponseEntity.status(HttpStatus.OK).body(cartBookService.createCartBooks(memberId, request));
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/update")
 	public ResponseEntity<Void> updateCartBook(@CurrentMembers Long memberId,
 		@Valid @RequestBody UpdateCartBookQuantityRequest request) {
@@ -70,14 +70,14 @@ public class CartController implements CartControllerDocs {
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@DeleteMapping("/{bookId}")
 	public ResponseEntity<Void> deleteCartBook(@CurrentMembers Long memberId, @PathVariable Long bookId) {
 		cartBookService.deleteCartBook(memberId, bookId);
 		return ResponseEntity.ok().build();
 	}
 
-	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	//@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@DeleteMapping
 	public ResponseEntity<Void> deleteCartBooks(@CurrentMembers Long memberId,
 		@Valid @RequestBody DeleteCartBookListRequest request) {

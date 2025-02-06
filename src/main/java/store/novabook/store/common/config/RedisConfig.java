@@ -21,7 +21,6 @@ import store.novabook.store.common.util.dto.RedisConfigDto;
 @EnableRedisRepositories
 @RequiredArgsConstructor
 public class RedisConfig {
-	private final Environment environment;
 
 	@Value("${redis-port}")
 	private Integer redisPort;

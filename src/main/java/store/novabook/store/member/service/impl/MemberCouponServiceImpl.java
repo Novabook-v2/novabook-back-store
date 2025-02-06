@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import store.novabook.store.common.adatper.CouponAdapter;
 import store.novabook.store.common.adatper.CouponStatus;
 import store.novabook.store.common.adatper.dto.CreateCouponRequest;
@@ -37,6 +38,7 @@ import store.novabook.store.member.repository.MemberCouponRepository;
 import store.novabook.store.member.repository.MemberRepository;
 import store.novabook.store.member.service.MemberCouponService;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -104,6 +106,7 @@ public class MemberCouponServiceImpl implements MemberCouponService {
 	// 웰컴 쿠폰
 	@Override
 	public CreateMemberCouponResponse createMemberCouponByMessage(RegisterCouponMessage message) {
+		log.info("member Info = {}" , message.memberId());
 		Member member = memberRepository.findById(message.memberId())
 			.orElseThrow(() -> new NotFoundException(ErrorCode.MEMBER_NOT_FOUND));
 		MemberCoupon memberCoupon = MemberCoupon.builder().member(member).couponId(message.couponId()).build();

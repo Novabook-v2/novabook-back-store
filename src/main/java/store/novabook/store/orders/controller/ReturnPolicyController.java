@@ -26,21 +26,21 @@ public class ReturnPolicyController implements ReturnPolicyControllerDocs {
 
 	private final ReturnPolicyService returnPolicyService;
 
-	@CheckRole("ROLE_ADMIN")
+	//@CheckRole("ROLE_ADMIN")
 	@PostMapping
 	public ResponseEntity<CreateResponse> createReturnPolicy(@Valid @RequestBody CreateReturnPolicyRequest request) {
 		CreateResponse response = returnPolicyService.save(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	//@CheckRole("ROLE_ADMIN")
 	@GetMapping
 	public ResponseEntity<Page<GetReturnPolicyResponse>> getReturnPolicyAll() {
 		Page<GetReturnPolicyResponse> response = returnPolicyService.getReturnPolicies();
 		return ResponseEntity.ok(response);
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	//@CheckRole("ROLE_ADMIN")
 	@GetMapping("{id}")
 	public ResponseEntity<GetReturnPolicyResponse> getReturnPolicy(@PathVariable Long id) {
 		GetReturnPolicyResponse response = returnPolicyService.getReturnPolicyById(id);

@@ -18,7 +18,7 @@ public interface CartBookRepository extends JpaRepository<CartBook, Long> {
 
 	CartBook findByCartAndBookIdAndIsExposedTrue(Cart cart, Long bookId);
 
-	Integer countByCartIdAndIsExposedTrue(Cart cart);
+	Integer countByCartIdAndIsExposedTrue(Long cartId);
 
 
 }

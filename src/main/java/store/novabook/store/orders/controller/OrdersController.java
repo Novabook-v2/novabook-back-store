@@ -38,7 +38,7 @@ public class OrdersController implements OrdersControllerDocs {
 		return ResponseEntity.noContent().build();
 	}
 
-	@CheckRole("ROLE_ADMIN")
+	//@CheckRole("ROLE_ADMIN")
 	@GetMapping("/admin")
 	public ResponseEntity<Page<GetOrdersAdminResponse>> getOrdersAdmin(Pageable pageable) {
 		Page<GetOrdersAdminResponse> responses = ordersService.getOrdersAdminResponsesAll(pageable);

@@ -182,8 +182,7 @@ public class CartBookServiceImpl implements CartBookService {
 			Cart cart = optionalCart.get();
 
 			// 요청된 도서 ID로 해당하는 CartBook 엔티티 조회
-			count = cartBookRepository.countByCartIdAndIsExposedTrue(cart);
-
+			count = cartBookRepository.countByCartIdAndIsExposedTrue(cart.getId());
 			return count;
 		}
 		return count;

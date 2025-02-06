@@ -41,7 +41,7 @@ public class ReviewController implements ReviewControllerDocs {
 		return ResponseEntity.ok(getReviewListResponses);
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PostMapping("/{ordersBookId}")
 	public ResponseEntity<CreateReviewResponse> createReviewed(
 		@PathVariable Long ordersBookId,
@@ -51,7 +51,7 @@ public class ReviewController implements ReviewControllerDocs {
 		return ResponseEntity.status(HttpStatus.CREATED).body(createReviewResponse);
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@PutMapping("/reviews/{reviewsId}")
 	public ResponseEntity<Void> updateReviewed(@Valid @RequestBody UpdateReviewRequest request,
 		@PathVariable Long reviewsId) {

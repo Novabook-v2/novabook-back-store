@@ -29,14 +29,14 @@ public class PointHistoryController implements PointHistoryControllerDocs {
 		return ResponseEntity.status(HttpStatus.OK).body(pointHistoryList);
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping("/member/point")
 	public ResponseEntity<GetPointResponse> getPointTotalByMemberId(@CurrentMembers Long memberId) {
 		GetPointResponse response = pointHistoryService.getPointTotalByMemberId(memberId);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
-	// @CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
+	@CheckRole({"ROLE_ADMIN", "ROLE_MEMBERS"})
 	@GetMapping(value = "/member", params = {"page", "size"})
 	public ResponseEntity<Page<GetPointHistoryResponse>> getPointHistoryByMemberIdPage(
 		@CurrentMembers Long memberId, Pageable pageable) {
