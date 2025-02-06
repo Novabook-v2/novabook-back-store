@@ -2,6 +2,7 @@ package store.novabook.store.book.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -46,6 +48,7 @@ public class Book {
 	private String title;
 
 	@NotNull
+	@Length(max = 10000)
 	private String description;
 
 	@NotNull
