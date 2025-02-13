@@ -19,7 +19,7 @@ import store.novabook.store.common.adatper.dto.GetCouponResponse;
 import store.novabook.store.common.response.ApiResponse;
 import store.novabook.store.common.response.PageResponse;
 
-@FeignClient(name = "gateway-service", path = "/api/v1/coupon", contextId = "couponClient")
+@FeignClient(name = "gateway-service", url = "http://gateway-service:9777/api/v1/coupon", contextId = "couponClient")
 public interface CouponAdapter {
 
 	@GetMapping

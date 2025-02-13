@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,11 +36,14 @@ import store.novabook.store.image.service.ImageService;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
+@Profile({"dev", "default"})
 public class ImageServiceImpl implements ImageService {
 	private final ImageRepository imageRepository;
 	private final ReviewImageRepository reviewImageRepository;
 	private final BookImageRepository bookImageRepository;
-	private static final String LOCAL_PATH = "/Users/isehui/nhn-academy/supernova-v2/novabook-back-store/src/main/resources/tmp/";
+
+	@Value("${IMAGE_SAVE_PATH}")
+	private String LOCAL_PATH;
 
 	@Override
 	public void createReviewImage(Review review, List<ReviewImageDTO> reviewImageDTOs) {

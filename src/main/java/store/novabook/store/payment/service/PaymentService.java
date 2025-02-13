@@ -1,7 +1,6 @@
 package store.novabook.store.payment.service;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.messaging.handler.annotation.Payload;
 
 import store.novabook.store.orders.dto.OrderSagaMessage;
@@ -14,6 +13,6 @@ public interface PaymentService {
 	@RabbitListener(queues = "nova.orders.compensate.approve.payment.queue")
 	void compensateCancelOrder(@Payload OrderSagaMessage orderSagaMessage);
 
-	@RabbitListener(queues = "nova.payment.request.pay.cancel.queue")
+	@RabbitListener(queues = "nova.payment.cancel.queue")
 	void cancelOrder(@Payload RequestPayCancelMessage message);
 }

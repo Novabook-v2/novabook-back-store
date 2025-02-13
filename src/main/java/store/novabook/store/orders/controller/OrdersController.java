@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import store.novabook.store.common.security.aop.CheckRole;
 import store.novabook.store.orders.controller.docs.OrdersControllerDocs;
 import store.novabook.store.orders.dto.request.UpdateOrdersAdminRequest;
 import store.novabook.store.orders.dto.response.GetOrdersAdminResponse;

@@ -1,22 +1,7 @@
-DB_HOST: "localhost"
-DB_PORT: 3306
-DB_NAME: "be6_supernova_dev"
-DB_USERNAME: "root"
-DB_PASSWORD: "9eexju!@12"
-
-redis-host: "localhost"
-redis-port: 6379
-redis-password: "default"
-
-rabbitmq-host: "localhost"
-rabbitmq-username: "guest"
-rabbitmq-password: "guest"
-rabbitmq-port: 5672
-
-
 spring:
-  application:
-    name: 'store'
+  config:
+    activate:
+      on-profile: dev
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -37,23 +22,15 @@ spring:
     listener:
       simple:
         acknowledge-mode: none
-  #        retry:
-  #          enabled: true
-  #          initial-interval: 3000  # 최초 메시지 처리 실패 후 재시도까지의 인터벌 (3초)
-  #          max-interval: 10000    # 최대 재시도 인터벌 (10초)
-  #          max-attempts: 3        # 최대 재시도 횟수
-  #          multiplier: 2.0 # 이전 interval * multiplier = 다음 interval
-
 
   #절대 변경 금지
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
-
 
 logging:
   level:
@@ -67,3 +44,20 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+
+DB_HOST: "localhost"
+DB_PORT: 3306
+DB_NAME: "be6_supernova_dev"
+DB_USERNAME: "root"
+DB_PASSWORD: "9eexju!@12"
+
+redis-host: "localhost"
+redis-port: 6379
+redis-password: "default"
+
+rabbitmq-host: "localhost"
+rabbitmq-username: "guest"
+rabbitmq-password: "guest"
+rabbitmq-port: 5672
+
+IMAGE_SAVE_PATH: "/Users/isehui/nhn-academy/supernova-v2/novabook-back-store/src/main/resources/tmp/"

@@ -60,7 +60,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	@Override
-	@RabbitListener(queues = "nova.payment.request.pay.cancel.queue")
+	@RabbitListener(queues = "nova.payment.cancel.queue")
 	public void cancelOrder(@Payload RequestPayCancelMessage message) {
 		try {
 			Payment payment = paymentFactory.getPaymentStrategy(message.getPaymentType());

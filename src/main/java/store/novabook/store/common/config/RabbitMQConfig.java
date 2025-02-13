@@ -11,7 +11,6 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.RetryInterceptorBuilder;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.retry.RejectAndDontRequeueRecoverer;
@@ -20,12 +19,9 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.retry.interceptor.RetryOperationsInterceptor;
-import org.springframework.web.client.RestTemplate;
 
 import lombok.RequiredArgsConstructor;
-import store.novabook.store.common.util.dto.RabbitMQConfigDto;
 
 /**
  * RabbitMQ 설정 클래스.
@@ -47,8 +43,6 @@ public class RabbitMQConfig {
 
 	@Value("${rabbitmq-port}")
 	Integer rabbitmqPort;
-
-	private final Environment environment;
 
 	@Value("${rabbitmq.queue.couponCreateNormal}")
 	private String couponCreateNormalQueue;
@@ -83,16 +77,15 @@ public class RabbitMQConfig {
 	@Value("${rabbitmq.routing.couponRegisterHighTraffic}")
 	private String couponRegisterHighTrafficRoutingKey;
 
-	@Bean
-	public ConnectionFactory connectionFactory() {
-		CachingConnectionFactory connectionFactory = new CachingConnectionFactory(rabbitmqHost);
-		connectionFactory.setPort(rabbitmqPort);
-		connectionFactory.setUsername(rabbitmqUserName);
-		connectionFactory.setPassword(rabbitmqPassword);
-		return connectionFactory;
-	}
+	// @Bean
+	// public ConnectionFactory connectionFactory() {
+	// 	CachingConnectionFactory connectionFactory = new CachingConnectionFactory(rabbitmqHost);
+	// 	connectionFactory.setPort(rabbitmqPort);
+	// 	connectionFactory.setUsername(rabbitmqUserName);
+	// 	connectionFactory.setPassword(rabbitmqPassword);
+	// 	return connectionFactory;
+	// }
 
-	// retry factory
 	@Bean
 	public SimpleRabbitListenerContainerFactory rabbitRetryListenerContainerFactory(ConnectionFactory connectionFactory,
 		RetryOperationsInterceptor retryOperationsInterceptor) {

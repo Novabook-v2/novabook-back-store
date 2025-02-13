@@ -1,20 +1,20 @@
 package store.novabook.store.search.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import store.novabook.store.book.entity.Book;
 import store.novabook.store.common.exception.ErrorCode;
 import store.novabook.store.common.exception.InternalServerException;
-import store.novabook.store.image.entity.BookImage;
 import store.novabook.store.image.repository.BookImageRepository;
 import store.novabook.store.image.repository.ImageRepository;
 import store.novabook.store.search.dto.JpaGetBookSearchResponse;
 import store.novabook.store.search.repository.JpaBookSearchRepository;
-
-import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
